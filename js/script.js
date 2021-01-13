@@ -26,7 +26,7 @@ var deathSound = document.getElementById("sound_of_death");
 
 //Healthbar positions
 var barX = 200;
-var barY = 300;
+var barY = 200;
 
 // Array of Weapon Options
 var options = [{
@@ -96,10 +96,10 @@ function GamerInput(input) {
 var gamerInput = new GamerInput("None"); //No Input
 
 // Default Player
-var player = new GameObject("Player", "./img/player.png", 384, 100, 200, 300);
+var player = new GameObject("Player", "./img/player.png", 384, 100, 200, 200);
 
 // Gameobjects is a collection of the Actors within the game
-var gameobjects = [player, new GameObject("NPC", "./img/1to6.png", 384, 100, 600, 600)];
+var gameobjects = [player, new GameObject("NPC", "./img/1to6.png", 384, 100, 600, 400)];
 
 // Process keyboard input event
 function input(event) 
