@@ -4,6 +4,22 @@
 // including functions
 // Author Dawid Jerdonek
 
+var href = window.location.href
+
+//href will be equal to "https://DawidJerdonek.github.io/form/index.html?enemy=boss"
+console.log(href);
+var protocol = window.location.protocol
+//protocol will be equal to "https:"
+
+var host = window.location.host
+//host will be equal to "DawidJerdonek.github.io"
+
+var pathname = window.location.pathname
+//pathname will be equal to “/form/index.html”
+
+var search = window.location.search 
+//search will be equal to “?enemy=boss"
+
 // get a handle to the canvas context
 var canvas = document.getElementById("game");
 
@@ -197,7 +213,7 @@ function draw()
         if (gameobjects[i].health > 0) 
 		{
             //console.log("Image :" + gameobjects[i].img);
-			
+			healthBar();
 			// Draw each player GameObject  (img, width, health, x, y)
 							 //Image which we use - Allow image to animate using current frame    -    - draw using the width of each frame - the height of the image - position x       - position y     -
 			context.drawImage(gameobjects[i].img, (gameobjects[i].img.width /frames) * currentFrame, 0 ,(gameobjects[i].img.width /frames), gameobjects[i].img.height, gameobjects[i].x, gameobjects[i].y, 100, 100);
@@ -215,7 +231,7 @@ function draw()
 
         }
     }	
-	healthBar();
+
 }
 
 function gameloop() 
