@@ -16,7 +16,8 @@
 
 </head>
 
-<body>
+<body onload="onPageLoad()">
+
     <canvas tabindex="1" id="game" width="800" height="500" style="border: black 1px solid;">
         Oops! looks like your browser does not support canvas tag
     </canvas>
@@ -24,7 +25,37 @@
 	<audio src="./audio/lego-yoda-death-sound-effect.mp3" id="sound_of_death">
         Your browser does not support the audio tag
 	</audio>
-	
+
+<!--<h1>Request Parameters</h1>
+
+Commented out, you can replace action="." with action="url_to_your_game" e.g https://muddygames.bitbucket.io/game/index.html
+<form action="." method="get">
+    <input type="text" value="test" name="gamertag">
+    <button type="submit">Submit</button>
+  </form>
+    
+
+<script>
+function onPageLoad() {
+var href = window.location.href;
+    alert(href);
+   
+    var protocol = window.location.protocol;
+    alert(protocol);
+   
+    var host = window.location.host;
+    alert(host);
+   
+   
+    var pathname = window.location.pathname;
+    alert(pathname);
+   
+    var search = window.location.search;
+    alert(search);
+   
+}
+</script>
+-->
 	<h1 id="HUD" onload="weaponSelection()"></h1>
 	<table>
         <tbody>
