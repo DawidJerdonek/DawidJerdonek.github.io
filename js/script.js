@@ -7,7 +7,7 @@
 var href = window.location.href
 
 //href will be equal to "https://DawidJerdonek.github.io/form/index.html?enemy=boss"
-console.log(href);
+//console.log(href);
 var protocol = window.location.protocol
 //protocol will be equal to "https:"
 
@@ -38,7 +38,12 @@ var enemyFrames = 6;
 var enemyInitial = new Date().getTime();
 var enemyCurrent; // current time
 
+var gameWon = false;
+
 var deathSound = document.getElementById("sound_of_death");
+//Portal image
+var portal = new Image();
+portal.src = "./img/portal.png"
 
 //Healthbar positions
 var barX = 200;
@@ -46,42 +51,45 @@ var barY = 200;
 
 // Array of Weapon Options
 var options = [{
-    "text": "Select a Weapon",
-    "value": "No Weapon",
+    "text": "Use an Ability",
+    "value": "No Ability",
     "selected": true
   },
   {
-    "text": "Spear",
-    "value": "Spear"
-  },
-  {
-    "text": "Sword",
-    "value": "Longsword"
+    "text": "Passage",
+    "value": "Level Portal"
   },
   {
     "text": "Knife",
     "value": "Stilleto Knife"
   },
-  {
-    "text": "Crossbow",
-    "value": "Crossbow"
-  },
-  {
-    "text": "Assault Rifle",
-    "value": "Ak-47"
-  }
+
 ];
+
+var showPortal = false;
 
 //Allow for weapon selection
 function weaponSelection() {
   var selection = document.getElementById("equipment").value;
   var active = document.getElementById("active");
-  if (active.checked == true) {
+  if (active.checked == true) 
+  {
     document.getElementById("HUD").innerHTML = selection + " active ";
-    console.log("Weapon Active");
-  } else {
+    //console.log("Created");
+	if(selection === "Level Portal")
+	{
+		showPortal = true;
+	}
+	else 
+	{
+		showPortal = false; 
+	}
+  } 
+  else 
+  {
     document.getElementById("HUD").innerHTML = selection + " selected ";
-    console.log("Weapon Selected");
+   //console.log("Selected");
+	showPortal = false;
   }
 }
 
@@ -91,7 +99,7 @@ for (var i = 0; i < options.length; i++) {
   var option = options[i];
   selectBox.options.add(new Option(option.text, option.value, option.selected));
 }
-
+//Game objects, player and enemy
 function GameObject(name, img, width, health, x, y) 
 {
     this.name = name;
@@ -151,7 +159,7 @@ function input(event)
 
 function update() 
 {
-	
+	weaponSelection()
     // Iterate through all GameObjects
     // Updating position and gamestate
     // console.log("Update");
@@ -161,7 +169,7 @@ function update()
 		//Move player up
 		gameobjects[0].y -= 4;
 		barY -= 4;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
     }
 		
@@ -170,7 +178,7 @@ function update()
 		//Move player left
         gameobjects[0].x -= 4;
 		barX -= 4;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
     }
 		
@@ -179,7 +187,7 @@ function update()
 		//Move player right
         gameobjects[0].x += 4;
 		barX += 4;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
     }
 		
@@ -188,7 +196,7 @@ function update()
 		//Move player down
         gameobjects[0].y += 4;
 		barY += 4;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
     }
 
@@ -206,32 +214,38 @@ function draw()
 {
 	// Clear Canvas
 	context.clearRect(0, 0, canvas.width, canvas.height);
-    // Iterate through all GameObjects
-	
-    for (i = 0; i < gameobjects.length - 1; i++) 
+	if(showPortal === true)
 	{
-        if (gameobjects[i].health > 0) 
-		{
-            //console.log("Image :" + gameobjects[i].img);
-			healthBar();
-			// Draw each player GameObject  (img, width, health, x, y)
-							 //Image which we use - Allow image to animate using current frame    -    - draw using the width of each frame - the height of the image - position x       - position y     -
-			context.drawImage(gameobjects[i].img, (gameobjects[i].img.width /frames) * currentFrame, 0 ,(gameobjects[i].img.width /frames), gameobjects[i].img.height, gameobjects[i].x, gameobjects[i].y, 100, 100);
-			
-        }
+		context.drawImage(portal,500,10);
 	}
 	
-    for (i = 1; i < gameobjects.length; i++) 
+	if(gameWon === false)
 	{
-        if (gameobjects[i].health > 0) 
+		// Iterate through all GameObjects
+		for (i = 0; i < gameobjects.length - 1; i++) 
 		{
-			
-			// Draw each enemy GameObject  (img, width, health, x, y)
-			context.drawImage(gameobjects[i].img, (gameobjects[i].img.width /enemyFrames) * enemyCurrentFrame, 0 ,(gameobjects[i].img.width /enemyFrames), gameobjects[i].img.height, gameobjects[i].x, gameobjects[i].y, 100, 100)
+			if (gameobjects[i].health > 0) 
+			{
+				//console.log("Image :" + gameobjects[i].img);
+				healthBar();
+				// Draw each player GameObject  (img, width, health, x, y)
+								//Image which we use - Allow image to animate using current frame    -    - draw using the width of each frame - the height of the image - position x       - position y     -
+				context.drawImage(gameobjects[i].img, (gameobjects[i].img.width /frames) * currentFrame, 0 ,(gameobjects[i].img.width /frames), gameobjects[i].img.height, gameobjects[i].x, gameobjects[i].y, 100, 100);
+				
+			}
+		}
+		
+		for (i = 1; i < gameobjects.length; i++) 
+		{
+			if (gameobjects[i].health > 0) 
+			{
+				
+				// Draw each enemy GameObject  (img, width, health, x, y)
+				context.drawImage(gameobjects[i].img, (gameobjects[i].img.width /enemyFrames) * enemyCurrentFrame, 0 ,(gameobjects[i].img.width /enemyFrames), gameobjects[i].img.height, gameobjects[i].x, gameobjects[i].y, 100, 100)
 
-        }
-    }	
-
+			}
+		}
+	}	
 }
 
 function gameloop() 
@@ -290,7 +304,6 @@ function collision()
 	var collisionX = gameobjects[1].x - gameobjects[0].x;
 	var collisionY = gameobjects[1].y - gameobjects[0].y;
 	
-
 	if (collisionX < 60 && collisionX > -60) 
 	{
 		if(collisionY > - 100 && collisionY < 100) 
@@ -311,6 +324,24 @@ function collision()
 			}
 		}
 	}
+	
+	var portalCollisionX = 500 - gameobjects[0].x;
+	var portalCollisionY = 10 - gameobjects[0].y;
+	var halfWidth = portal.width / 2;
+	console.log(portalCollisionX);
+	console.log(portalCollisionY);
+
+	if (showPortal === true)
+	{
+		if(portalCollisionX < -10 && portalCollisionX > -90)
+		{
+			if(portalCollisionY < 0 && portalCollisionY > -134)
+			{
+			gameWon = true;
+			}
+		}
+		
+	}
 }
 
 function buttonOnClickX()
@@ -320,7 +351,7 @@ function buttonOnClickX()
 	//Move player left
         gameobjects[0].x -= 10;
 		barX -= 10;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
 }
 function buttonOnClickY()
@@ -330,7 +361,7 @@ function buttonOnClickY()
 	//Move player up
 		gameobjects[0].y -= 10;
 		barY -= 10;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
 }
 function buttonOnClickA()
@@ -340,7 +371,7 @@ function buttonOnClickA()
 	//Move player down
         gameobjects[0].y += 10;
 		barY += 10;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
 }
 function buttonOnClickB()
@@ -350,7 +381,7 @@ function buttonOnClickB()
 	//Move player right
         gameobjects[0].x += 10;
 		barX += 10;
-		console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
+		//console.log(gameobjects[0].name + " at X: " + gameobjects[0].x + "  Y: " + gameobjects[0].y);
 		animate();
 }
 
