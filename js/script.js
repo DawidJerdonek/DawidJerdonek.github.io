@@ -315,9 +315,10 @@ function onPageLoad()
    
     var url = document.location.href;
     var search = window.location.search;
+	
+	var result = url.split("="); // Splits string based on =
 	alert(url);
     alert(search);
-	var result = search.split("="); // Splits string based on =
 	alert(result[0]);
 	alert(result[1]);
 }
@@ -353,8 +354,8 @@ function collision()
 	var portalCollisionX = 500 - gameobjects[0].x;
 	var portalCollisionY = 10 - gameobjects[0].y;
 	var halfWidth = portal.width / 2;
-	console.log(portalCollisionX);
-	console.log(portalCollisionY);
+	//console.log(portalCollisionX);
+	//console.log(portalCollisionY);
 
 	if (showPortal === true)
 	{
