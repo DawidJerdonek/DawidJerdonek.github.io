@@ -317,8 +317,12 @@ function onPageLoad()
     var search = window.location.search;
 	alert(url);
     alert(search);
-   
+	var result = search.split("="); // Splits string based on =
+	alert(result[0]);
+	alert(result[1]);
 }
+
+
 
 function collision()
 {
