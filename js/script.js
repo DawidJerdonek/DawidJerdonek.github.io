@@ -317,9 +317,9 @@ function onPageLoad()
     var search = window.location.search;
 	
 	var result = url.split("="); // Splits string based on =
-	alert(url);
-    alert(search);
-	alert(result[0]);
+	//alert(url);
+    //alert(search);
+	//alert(result[0]);
 	alert(result[1]);
 }
 
