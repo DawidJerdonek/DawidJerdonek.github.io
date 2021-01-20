@@ -312,6 +312,7 @@ function onPageLoad()
    
    // var pathname = window.location.pathname;
    // alert(pathname);
+   
     var url = document.location.href;
     var search = window.location.search;
 	alert(url);
