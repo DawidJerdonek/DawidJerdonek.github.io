@@ -299,7 +299,25 @@ function healthBar()
 	context.fillRect(barX, barY - 30, fillVal * width, height);
 }
 
-
+function onPageLoad() 
+{
+	//var href = window.location.href;
+   // alert(href);
+   
+   // var protocol = window.location.protocol;
+   // alert(protocol);
+   
+   // var host = window.location.host;
+   // alert(host);
+   
+   // var pathname = window.location.pathname;
+   // alert(pathname);
+    var url = document.location.href;
+    var search = window.location.search;
+	alert(url);
+    alert(search);
+   
+}
 
 function collision()
 {
