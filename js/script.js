@@ -4,20 +4,20 @@
 // including functions
 // Author Dawid Jerdonek
 
-var href = window.location.href
+//var href = window.location.href
 
 //href will be equal to "https://DawidJerdonek.github.io/form/index.html?enemy=boss"
 //console.log(href);
-var protocol = window.location.protocol
+//var protocol = window.location.protocol
 //protocol will be equal to "https:"
 
-var host = window.location.host
+//var host = window.location.host
 //host will be equal to "DawidJerdonek.github.io"
 
-var pathname = window.location.pathname
+//var pathname = window.location.pathname
 //pathname will be equal to “/form/index.html”
 
-var search = window.location.search 
+//var search = window.location.search 
 //search will be equal to “?enemy=boss"
 
 // get a handle to the canvas context
