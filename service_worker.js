@@ -6,7 +6,7 @@ var filesToCache = [
   '/js/script.js'
 ];
 
-/* Cache contents when Offline See Cache */
+// Cache contents when Offline See Cache
 self.addEventListener('install', function(e) {
   e.waitUntil(
     caches.open(cacheName).then(function(cache) {
@@ -15,7 +15,7 @@ self.addEventListener('install', function(e) {
   );
 });
 
-/* Serve cached content when offline, examine Cache Storage */
+// Serve cached content when offline, examine Cache Storage
 self.addEventListener('fetch', function(e) {
   e.respondWith(
     caches.match(e.request).then(function(response) {
