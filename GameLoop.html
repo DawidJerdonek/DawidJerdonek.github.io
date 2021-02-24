@@ -28,7 +28,11 @@
   
 	<meta name="msapplication-TileImage" content="img/icons/144_144.png">
 	<meta name="msapplication-TileColor" content="#FFFFFF">
+	
 	<link rel="manifest" href="/manifest.json">
+	
+	<link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+	<link rel="icon" href="icon.ico" type="image/x-icon">
 
 </head>
 
@@ -45,6 +49,10 @@
 	<h1 id="HUD" onload="weaponSelection()"></h1>
 	<table>
         <tbody>
+			<tr>
+			    <td colspan="3"><canvas id="game"></canvas>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="3" align="center">
 					<label class="switch">
