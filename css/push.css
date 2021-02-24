@@ -15,7 +15,7 @@
     background-color: #00FF00;
 }
 .button.blue:hover {
-    background-color: #0000FF;
+    background-color: #007bff;
 }
 .button.yellow:hover {
     background-color: #FFFF00;
@@ -42,7 +42,7 @@
 }
 
 .blue {
-    color: #0000FF;
+    color: #007bff;
 }
 .blue:hover {
     color: #000000;
